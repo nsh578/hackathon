@@ -6,20 +6,24 @@ import { TabNavigator, TabBarBottom } from 'react-navigation';
 import Colors from '../constants/Colors';
 
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import ArtistsScreen from '../screens/ArtistsScreen';
+import ClubsScreen from '../screens/ClubsScreen';
+import NoticesScreen from '../screens/NoticesScreen';
 
 export default TabNavigator(
   {
     Home: {
-      screen: HomeScreen,
+      screen: HomeScreen
     },
-    Links: {
-      screen: LinksScreen,
+    Artists: {
+      screen: ArtistsScreen
     },
-    Settings: {
-      screen: SettingsScreen,
+    Clubs: {
+      screen: ClubsScreen
     },
+    Notices: {
+      screen: NoticesScreen
+    }
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -33,12 +37,23 @@ export default TabNavigator(
                 ? `ios-information-circle${focused ? '' : '-outline'}`
                 : 'md-information-circle';
             break;
-          case 'Links':
-            iconName = Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-link';
-            break;
-          case 'Settings':
+          case 'Artists':
             iconName =
-              Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options';
+              Platform.OS === 'ios'
+                ? `ios-link${focused ? '' : '-outline'}`
+                : 'md-link';
+            break;
+          case 'Clubs':
+            iconName =
+              Platform.OS === 'ios'
+                ? `ios-link${focused ? '' : '-outline'}`
+                : 'md-link';
+            break;
+          case 'Notices':
+            iconName =
+              Platform.OS === 'ios'
+                ? `ios-options${focused ? '' : '-outline'}`
+                : 'md-options';
         }
         return (
           <Ionicons
@@ -48,11 +63,11 @@ export default TabNavigator(
             color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
           />
         );
-      },
+      }
     }),
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     animationEnabled: false,
-    swipeEnabled: false,
+    swipeEnabled: false
   }
 );
