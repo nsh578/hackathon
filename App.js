@@ -5,9 +5,9 @@ import store from './redux/store';
 import Main from './Main';
 
 const App = () => (
-	<Provider store={store}>
-		<Main />
-	</Provider>
+  <Provider store={store}>
+    <Main />
+  </Provider>
 );
 
 export default App;
