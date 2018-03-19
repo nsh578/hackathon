@@ -27,22 +27,13 @@ export default class HomeScreen extends React.Component {
   };
 
   state = {
-    last: false,
     currentPage: 0,
   };
 
   _onScroll = e => {
+    const { currentPage } = this.state;
     const newPageNum = Math.round(e.nativeEvent.contentOffset.x / width);
-    if (newPageNum >= 4) {
-      this.setState({ last: true });
-    } else {
-      this.setState({ last: false });
-    }
-
-    newPageNum != this.state.currentPage &&
-      this.setState({
-        currentPage: newPageNum,
-      });
+    newPageNum != currentPage && this.setState({ currentPage: newPageNum });
   };
 
   render() {
@@ -54,9 +45,6 @@ export default class HomeScreen extends React.Component {
         </View>
         <View style={styles.homeTop}>
           <View style={styles.horizCardContainer}>
-            <Text style={styles.horizCardTitle}>
-              Check out Eric Nam's new weekly challenges.
-            </Text>
             <ScrollView
               style={styles.horizScroll}
               horizontal={true}
@@ -65,16 +53,25 @@ export default class HomeScreen extends React.Component {
               onScroll={this._onScroll}
             >
               <View style={styles.horizCardContainer}>
+                <Text style={styles.horizCardTitle}>
+                  Check out Eric Nam's new weekly challenges.
+                </Text>
                 <View style={styles.horizCard}>
                   <Text>ChallengeCard</Text>
                 </View>
               </View>
               <View style={styles.horizCardContainer}>
+                <Text style={styles.horizCardTitle}>
+                  Check out Eric Nam's new weekly challenges.
+                </Text>
                 <View style={styles.horizCard}>
                   <Text>ChallengeCard2</Text>
                 </View>
               </View>
               <View style={styles.horizCardContainer}>
+                <Text style={styles.horizCardTitle}>
+                  Check out Eric Nam's new weekly challenges.
+                </Text>
                 <View style={styles.horizCard}>
                   <Text>ChallengeCard3</Text>
                 </View>
@@ -175,28 +172,31 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 20,
     paddingRight: 20,
+    height: 150,
+  },
+  horizScroll: {
+    position: 'relative',
+  },
+  horizCardContainer: {
+    width: width,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 180,
   },
   horizCardTitle: {
     color: '#fff',
     fontSize: 24,
     fontWeight: '600',
     width: width - 40,
-  },
-  horizScroll: {
-    position: 'relative',
-    paddingTop: 10,
-  },
-  horizCardContainer: {
-    width: width,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
+    marginBottom: 10,
   },
   horizCard: {
     width: width - 40,
+    height: 94,
     backgroundColor: '#f1f1f1',
-    flex: 1,
+    flex: 2,
     flexDirection: 'row',
+    zIndex: 2,
     borderRadius: 8,
     paddingTop: 13,
     paddingLeft: 10,
@@ -206,19 +206,19 @@ const styles = StyleSheet.create({
   dots: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: '70%',
+    width: '25%',
     justifyContent: 'space-around',
-    marginBottom: 20,
+    paddingTop: 10,
   },
   dotFilled: {
-    height: 16,
-    width: 16,
+    height: 14,
+    width: 14,
     resizeMode: 'contain',
-    tintColor: '#009cd7',
+    tintColor: '#50e3c2',
   },
   dotDefault: {
-    height: 15,
-    width: 15,
+    height: 14,
+    width: 14,
     resizeMode: 'contain',
     opacity: 0.5,
   },

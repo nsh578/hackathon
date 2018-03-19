@@ -1,9 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Image, View } from 'react-native';
+
+// Assets
+import logo from '../../assets/images/VenuText.png';
 
 export const Logo = props => (
   <View style={styles.logoContainer}>
-    <Text style={styles.logo}>VENU</Text>
+    <Image style={styles.logo} source={logo} />
   </View>
 );
 
@@ -11,15 +14,15 @@ const styles = StyleSheet.create({
   logoContainer: {
     flex: 1,
     width: '100%',
-    paddingTop: 34,
+    paddingTop: 14,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
   logo: {
     color: '#fff',
-    fontSize: 32,
-    height: 72,
+    width: 72,
+    height: 18,
     fontWeight: 'bold',
   },
 });
