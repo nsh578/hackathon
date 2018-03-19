@@ -10,6 +10,10 @@ import {
 import { WebBrowser } from 'expo';
 import Colors from '../constants/Colors';
 const { width } = Dimensions.get('window');
+// Assets
+import dot from '../assets/images/greyDot.png';
+
+import OnboardScreen from './OnboardingScreen';
 
 // UI
 import Feed from '../components/Feed';
@@ -132,7 +136,7 @@ const Dots = ({ list, current }) => {
         return (
           <Image
             key={i}
-            source={''}
+            source={dot}
             style={current === i ? styles.dotFilled : styles.dotDefault}
           />
         );

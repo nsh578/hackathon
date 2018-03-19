@@ -1,5 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView, Text, Image, Dimensions } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  Image,
+  Dimensions,
+} from 'react-native';
 
 import { Hero } from '../components/ui/Hero';
 import { RoundedButton } from '../components/ui/RoundedButton';
@@ -36,35 +43,36 @@ class OnboardingScreen extends React.Component {
     if (this.state.currentPage === 0) {
       this.sv.scrollTo({ x: width, y: 0, animated: true });
     } else {
-      const newX = (this.state.currentPage+1) * width;
+      const newX = (this.state.currentPage + 1) * width;
       this.sv.scrollTo({ x: newX, y: 0, animated: true });
     }
-  }
+  };
 
-  _onScroll = (e) => {
-    const newPageNum = parseInt(e.nativeEvent.contentOffset.x/width);
+  _onScroll = e => {
+    const newPageNum = Math.round(e.nativeEvent.contentOffset.x / width);
     if (newPageNum >= 4) {
       this.setState({ last: true });
     } else {
       this.setState({ last: false });
     }
 
-    newPageNum != this.state.currentPage && this.setState({
-      currentPage: newPageNum,
-    });
-  }
+    newPageNum != this.state.currentPage &&
+      this.setState({
+        currentPage: newPageNum,
+      });
+  };
 
   render() {
     const { last } = this.state;
     return (
       <View style={styles.container}>
         <ScrollView
-          ref={(sv) => this.sv = sv}
+          ref={sv => (this.sv = sv)}
           horizontal={true}
           pagingEnabled={true}
           onScroll={this._onScroll}
         >
-          <Hero 
+          <Hero
             lead={messages[0]}
             backgroundImage={a}
             logo={logo}
@@ -76,44 +84,33 @@ class OnboardingScreen extends React.Component {
           <Hero lead={'last'} backgroundImage={a} last={last} />
         </ScrollView>
         <View style={styles.bottom}>
-          <Dots
-            current={this.state.currentPage}
-            list={[0,1,2,3,4]}
-          />
+          <Dots current={this.state.currentPage} list={[0, 1, 2, 3, 4]} />
           <View style={styles.button}>
-            {
-              !last &&
-              <RoundedButton
-                handlePress={this._handlePress}
-                text='Next'
-              />
-            }
+            {!last && (
+              <RoundedButton handlePress={this._handlePress} text="Next" />
+            )}
           </View>
         </View>
       </View>
-    )
+    );
   }
 }
 
-const Dots = (props) => {
+const Dots = props => {
   return (
     <View style={styles.dots}>
-      {props.list.map((i) => {
+      {props.list.map(i => {
         return (
           <Image
             key={i}
             source={dot}
-            style={
-              props.current === i
-              ? styles.dotFilled
-              : styles.dotDefault
-            }
+            style={props.current === i ? styles.dotFilled : styles.dotDefault}
           />
-        )
+        );
       })}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
