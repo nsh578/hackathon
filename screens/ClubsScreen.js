@@ -21,13 +21,13 @@ import { HorizontalSeparator } from '../components/ui/HorizontalSeparator';
 import tempPlaceHolderImage from '../assets/images/Eric-Nam.jpg';
 
 {/* TODO: Getting error when making Box separate component */}
-const Box = () => {
+const Box = ({artistName, artistImage}) => {
   return (
     <View style={styles.imageContainer}>
       <Image style={styles.image}
         source={tempPlaceHolderImage} />
       <View style={styles.boxName}>
-        <Text style={{color:'#fff'}}>Eric Nam</Text>
+        <Text style={{color:'#fff'}}>{artistName}</Text>
       </View>
     </View>
   );
@@ -49,8 +49,8 @@ export default class ClubsScreen extends React.Component {
           <SearchBar />
         </View>
         <View style={styles.boxContainer}>
-          <Box />
-          <Box />
+          <Box artistName={'Eric Nam'}/>
+          <Box artistName={'The Strokes'}/>
         </View>
         <Feed type={'Fan'} />
       </View>
