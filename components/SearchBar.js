@@ -31,21 +31,15 @@ export default class SearchBar extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '80%',
-    // paddingTop: 14,
-    // flexDirection: 'row',
-    // justifyContent: 'center',
-    // alignItems: 'center',
   },
   input: {
-    height: 72,
-    borderColor: 'grey',
-    borderWidth: 1,
+    height: 40,
     textAlign: 'center',
-    height: 50,
-    borderWidth: 2,
-    borderRadius: 20 ,
-    backgroundColor : "#FFF",
     fontSize: 20,
+    fontWeight: '600',
+    borderRadius: 30,
+    borderWidth: 0,
+    // borderColor: 'grey',
+    backgroundColor : "#FFF",
   },
 });

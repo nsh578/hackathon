@@ -11,9 +11,26 @@ import Colors from '../constants/Colors';
 
 // UI
 import SearchBar from '../components/SearchBar';
+// import Box from '../components/ui/Box';
 import { Logo } from '../components/ui/Logo';
+import { RoundedButton } from '../components/ui/RoundedButton';
 import { Avatar } from '../components/ui/Avatar';
 import { HorizontalSeparator } from '../components/ui/HorizontalSeparator';
+
+import tempPlaceHolderImage from '../assets/images/Eric-Nam.jpg';
+
+{/* TODO: Getting error when making Box separate component */}
+const Box = () => {
+  return (
+    <View style={styles.imageContainer}>
+      <Image style={styles.image}
+        source={tempPlaceHolderImage} />
+      <View style={styles.boxName}>
+        <Text style={{color:'#fff'}}>Eric Nam</Text>
+      </View>
+    </View>
+  );
+};
 
 export default class ClubsScreen extends React.Component {
   static navigationOptions = {
@@ -29,6 +46,10 @@ export default class ClubsScreen extends React.Component {
         </View>
         <View style={styles.searchContainer}>
           <SearchBar />
+        </View>
+        <View style={styles.boxContainer}>
+          <Box />
+          <Box />
         </View>
       </View>
     );
@@ -50,11 +71,26 @@ const styles = StyleSheet.create({
   },
   topNav: {
     width: '100%',
-    height: 200,
-    paddingBottom: 35,
+    paddingBottom: 10,
   },
   searchContainer: {
-    flex: 1,
+    height: 79,
+    width: '80%',
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  boxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'center',
+  },
+  image: {
+    height: 115,
+    width: 115,
+    borderRadius: 4,
+  },
+  boxName: {
+    marginTop: -25,
+    backgroundColor: 'rgba(0,0,0,.5)',
   }
 });

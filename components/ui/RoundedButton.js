@@ -24,3 +24,5 @@ const styles= StyleSheet.create({
     padding: '10%',
   },
 });
+
+RoundedButton.defaultProps = { text: 'Request'};

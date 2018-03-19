@@ -9,6 +9,7 @@ export const Card = ({ avatar }) => {
   /*
     TODO: Make sure props are passed correctly to Card.
           Needs avatar, name, data, location, and content (Image/Video/etc.)
+          Use native base card component
   */
   const avatarSource = defaultImage || avatar;
 
@@ -92,3 +93,7 @@ const styles = StyleSheet.create({
   },
   content: {},
 });
+
+Card.defaultProps = {
+  
+};
