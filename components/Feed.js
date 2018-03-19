@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  ScrollView,
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-} from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { WebBrowser } from 'expo';
 
 // UI

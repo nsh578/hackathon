@@ -1,5 +1,12 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View, Dimensions } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Dimensions,
+} from 'react-native';
 import { WebBrowser } from 'expo';
 import Colors from '../constants/Colors';
 const { width } = Dimensions.get('window');
@@ -13,6 +20,25 @@ import { HorizSeperator } from '../components/ui/HorizSeperator';
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
+  };
+
+  state = {
+    last: false,
+    currentPage: 0,
+  };
+
+  _onScroll = e => {
+    const newPageNum = Math.round(e.nativeEvent.contentOffset.x / width);
+    if (newPageNum >= 4) {
+      this.setState({ last: true });
+    } else {
+      this.setState({ last: false });
+    }
+
+    newPageNum != this.state.currentPage &&
+      this.setState({
+        currentPage: newPageNum,
+      });
   };
 
   render() {
@@ -32,6 +58,7 @@ export default class HomeScreen extends React.Component {
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               pagingEnabled
+              onScroll={this._onScroll}
             >
               <View style={styles.horizCardContainer}>
                 <View style={styles.horizCard}>
@@ -43,7 +70,17 @@ export default class HomeScreen extends React.Component {
                   <Text>ChallengeCard2</Text>
                 </View>
               </View>
+              <View style={styles.horizCardContainer}>
+                <View style={styles.horizCard}>
+                  <Text>ChallengeCard3</Text>
+                </View>
+              </View>
             </ScrollView>
+            <Dots
+              style={styles.dotsRow}
+              current={this.state.currentPage}
+              list={[0, 1, 2]}
+            />
           </View>
         </View>
         <HorizSeperator />
@@ -87,6 +124,22 @@ export default class HomeScreen extends React.Component {
     );
   };
 }
+
+const Dots = ({ list, current }) => {
+  return (
+    <View style={styles.dots}>
+      {list.map(i => {
+        return (
+          <Image
+            key={i}
+            source={''}
+            style={current === i ? styles.dotFilled : styles.dotDefault}
+          />
+        );
+      })}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -145,5 +198,24 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 11,
+  },
+  dots: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '70%',
+    justifyContent: 'space-around',
+    marginBottom: 20,
+  },
+  dotFilled: {
+    height: 16,
+    width: 16,
+    resizeMode: 'contain',
+    tintColor: '#009cd7',
+  },
+  dotDefault: {
+    height: 15,
+    width: 15,
+    resizeMode: 'contain',
+    opacity: 0.5,
   },
 });
