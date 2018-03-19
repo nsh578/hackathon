@@ -12,26 +12,13 @@ import Colors from '../constants/Colors';
 // UI
 import Feed from '../components/Feed';
 import SearchBar from '../components/SearchBar';
-// import Box from '../components/ui/Box';
+import { Box } from '../components/ui/Box';
 import { Logo } from '../components/ui/Logo';
 import { RoundedButton } from '../components/ui/RoundedButton';
 import { Avatar } from '../components/ui/Avatar';
 import { HorizontalSeparator } from '../components/ui/HorizontalSeparator';
 
 import tempPlaceHolderImage from '../assets/images/Eric-Nam.jpg';
-
-{/* TODO: Getting error when making Box separate component */}
-const Box = ({artistName, artistImage}) => {
-  return (
-    <View style={styles.imageContainer}>
-      <Image style={styles.image}
-        source={tempPlaceHolderImage} />
-      <View style={styles.boxName}>
-        <Text style={{color:'#fff'}}>{artistName}</Text>
-      </View>
-    </View>
-  );
-};
 
 export default class ClubsScreen extends React.Component {
   static navigationOptions = {
@@ -77,7 +64,7 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     height: 79,
-    width: '80%',
+    width: '100%',
     display: 'flex',
     flexDirection: 'row',
   },

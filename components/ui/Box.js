@@ -6,19 +6,28 @@ import {
   Image
 } from 'react-native';
 
+import tempPlaceHolderImage from '../../assets/images/Eric-Nam.jpg';
 
-export const Box = props => (
-  <Text>Hello</Text>
-);
+export const Box = ({artistName, artistImage}) => {
+  return (
+    <View style={styles.imageContainer}>
+      <Image style={styles.image}
+        source={tempPlaceHolderImage} />
+      <View style={styles.boxName}>
+        <Text style={{color:'#fff'}}>{artistName}</Text>
+      </View>
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#f1f1f1',
-    borderRadius: 8,
-    marginBottom: 20,
-    height: 260,
-  },
   image: {
-
+    height: 115,
+    width: 115,
+    borderRadius: 4,
+  },
+  boxName: {
+    marginTop: -25,
+    backgroundColor: 'rgba(0,0,0,.5)',
   },
 });
