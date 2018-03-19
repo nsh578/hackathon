@@ -77,7 +77,6 @@ class OnboardingScreen extends React.Component {
         </ScrollView>
         <View style={styles.bottom}>
           <Dots
-            style={styles.dotsRow}
             current={this.state.currentPage}
             list={[0,1,2,3,4]}
           />
