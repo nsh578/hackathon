@@ -76,7 +76,7 @@ export default class HomeScreen extends React.Component {
               </View>
             </ScrollView>
             <Dots
-              style={styles.dotsRow}
+              style={styles.dotsContainer}
               current={this.state.currentPage}
               list={[0, 1, 2]}
             />
@@ -161,25 +161,22 @@ const styles = StyleSheet.create({
     height: 79,
   },
   homeTop: {
-    width: '100%',
-    height: 200,
-    paddingBottom: 35,
+    width: width,
+    paddingBottom: 15,
   },
   horizCardContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     paddingLeft: 20,
     paddingRight: 20,
-    height: 150,
   },
   horizScroll: {
     position: 'relative',
   },
   horizCardContainer: {
     width: width,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    height: 180,
   },
   horizCardTitle: {
     color: '#fff',
@@ -190,9 +187,8 @@ const styles = StyleSheet.create({
   },
   horizCard: {
     width: width - 40,
-    height: 94,
+    height: 97,
     backgroundColor: '#f1f1f1',
-    flex: 2,
     flexDirection: 'row',
     zIndex: 2,
     borderRadius: 8,
@@ -204,19 +200,19 @@ const styles = StyleSheet.create({
   dots: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: '25%',
+    width: '20%',
     justifyContent: 'space-around',
-    paddingTop: 10,
+    paddingTop: 15,
   },
   dotFilled: {
-    height: 14,
-    width: 14,
+    height: 12,
+    width: 12,
     resizeMode: 'contain',
     tintColor: '#50e3c2',
   },
   dotDefault: {
-    height: 14,
-    width: 14,
+    height: 12,
+    width: 12,
     resizeMode: 'contain',
     opacity: 0.5,
   },
