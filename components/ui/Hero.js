@@ -4,38 +4,22 @@ import { RoundedButton } from './RoundedButton';
 
 const { width } = Dimensions.get('window');
 
-export const Hero = (props) => {
-  console.log(props.backgroundImage)
+export const Hero = props => {
   const { logo, logoText, backgroundImage, lead } = props;
 
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.backgroundImage}
-        source={backgroundImage}
-      />
+      <Image style={styles.backgroundImage} source={backgroundImage} />
       <View style={styles.top}>
-        {
-          logo &&
-          <Image
-            style={styles.heroImage}
-            source={logo}
-          />
-        }
-        {
-          logoText &&
-          <Image
-            style={styles.heroText}
-            source={logoText}
-          />
-        }
+        {logo && <Image style={styles.heroImage} source={logo} />}
+        {logoText && <Image style={styles.heroText} source={logoText} />}
       </View>
       <View style={styles.bottom}>
         <Text style={styles.lead}>{props.lead}</Text>
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -78,5 +62,5 @@ const styles = StyleSheet.create({
     letterSpacing: 1.2,
     position: 'absolute',
     top: 0,
-  }
+  },
 });

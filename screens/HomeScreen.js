@@ -1,83 +1,89 @@
 import React from 'react';
 import {
-  Image,
-  Platform,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
+  Image,
+  Dimensions,
 } from 'react-native';
-import { WebBrowser } from 'expo';
+import Colors from '../constants/Colors';
+const { width } = Dimensions.get('window');
 
-import { MonoText } from '../components/StyledText';
+// Assets
+import dot from '../assets/images/greyDot.png';
+
+// UI
+import Feed from '../components/Feed';
+import { Logo } from '../components/ui/Logo';
+import { Avatar } from '../components/ui/Avatar';
+import { HorizontalSeparator } from '../components/ui/HorizontalSeparator';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
 
+  state = {
+    currentPage: 0,
+  };
+
+  _onScroll = e => {
+    const { currentPage } = this.state;
+    const newPageNum = Math.round(e.nativeEvent.contentOffset.x / width);
+    newPageNum != currentPage && this.setState({ currentPage: newPageNum });
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}
-        >
-          <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
+        <View style={styles.topNav}>
+          <Logo />
+          <Avatar source={''} />
+        </View>
+        <View style={styles.homeTop}>
+          <View style={styles.horizCardContainer}>
+            <ScrollView
+              style={styles.horizScroll}
+              horizontal={true}
+              pagingEnabled={true}
+              showsHorizontalScrollIndicator={false}
+              onScroll={this._onScroll}
+            >
+              <View style={styles.horizCardContainer}>
+                <Text style={styles.horizCardTitle}>
+                  Check out Eric Nam's new weekly challenges.
+                </Text>
+                <View style={styles.horizCard}>
+                  <Text>ChallengeCard</Text>
+                </View>
+              </View>
+              <View style={styles.horizCardContainer}>
+                <Text style={styles.horizCardTitle}>
+                  Check out Eric Nam's new weekly challenges.
+                </Text>
+                <View style={styles.horizCard}>
+                  <Text>ChallengeCard2</Text>
+                </View>
+              </View>
+              <View style={styles.horizCardContainer}>
+                <Text style={styles.horizCardTitle}>
+                  Check out Eric Nam's new weekly challenges.
+                </Text>
+                <View style={styles.horizCard}>
+                  <Text>ChallengeCard3</Text>
+                </View>
+              </View>
+            </ScrollView>
+            <Dots
+              style={styles.dotsRow}
+              current={this.state.currentPage}
+              list={[0, 1, 2]}
             />
           </View>
-
-          <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
-
-            <Text style={styles.getStartedText}>Get started by opening</Text>
-
-            <View
-              style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-            >
-              <MonoText style={styles.codeHighlightText}>
-                screens/HomeScreen.js
-              </MonoText>
-            </View>
-
-            <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
-            </Text>
-          </View>
-
-          <View style={styles.helpContainer}>
-            <TouchableOpacity
-              onPress={this._handleHelpPress}
-              style={styles.helpLink}
-            >
-              <Text style={styles.helpLinkText}>
-                Help, it didn’t automatically reload!
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>
-            This is a tab bar. You can edit it in:
-          </Text>
-
-          <View
-            style={[styles.codeHighlightContainer, styles.navigationFilename]}
-          >
-            <MonoText style={styles.codeHighlightText}>
-              navigation/MainTabNavigator.js
-            </MonoText>
-          </View>
         </View>
+        <HorizontalSeparator />
+        <Feed type={'Artist'} />
       </View>
     );
   }
@@ -118,10 +124,26 @@ export default class HomeScreen extends React.Component {
   };
 }
 
+const Dots = ({ list, current }) => {
+  return (
+    <View style={styles.dots}>
+      {list.map(i => {
+        return (
+          <Image
+            key={i}
+            source={dot}
+            style={current === i ? styles.dotFilled : styles.dotDefault}
+          />
+        );
+      })}
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.layoutBackground,
   },
   developmentModeText: {
     marginBottom: 20,
@@ -133,76 +155,69 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingTop: 30,
   },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
+  topNav: {
+    display: 'flex',
+    flexDirection: 'row',
+    height: 79,
   },
-  welcomeImage: {
-    width: 100,
-    height: 80,
+  homeTop: {
+    width: '100%',
+    height: 200,
+    paddingBottom: 35,
+  },
+  horizCardContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: 20,
+    paddingRight: 20,
+    height: 150,
+  },
+  horizScroll: {
+    position: 'relative',
+  },
+  horizCardContainer: {
+    width: width,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 180,
+  },
+  horizCardTitle: {
+    color: '#fff',
+    fontSize: 24,
+    fontWeight: '600',
+    width: width - 40,
+    marginBottom: 10,
+  },
+  horizCard: {
+    width: width - 40,
+    height: 94,
+    backgroundColor: '#f1f1f1',
+    flex: 2,
+    flexDirection: 'row',
+    zIndex: 2,
+    borderRadius: 8,
+    paddingTop: 13,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 11,
+  },
+  dots: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '25%',
+    justifyContent: 'space-around',
+    paddingTop: 10,
+  },
+  dotFilled: {
+    height: 14,
+    width: 14,
     resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
+    tintColor: '#50e3c2',
   },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
+  dotDefault: {
+    height: 14,
+    width: 14,
+    resizeMode: 'contain',
+    opacity: 0.5,
   },
 });
