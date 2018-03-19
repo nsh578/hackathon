@@ -10,6 +10,7 @@ import {
 import Colors from '../constants/Colors';
 
 // UI
+import Feed from '../components/Feed';
 import SearchBar from '../components/SearchBar';
 // import Box from '../components/ui/Box';
 import { Logo } from '../components/ui/Logo';
@@ -51,6 +52,7 @@ export default class ClubsScreen extends React.Component {
           <Box />
           <Box />
         </View>
+        <Feed type={'Fan'} />
       </View>
     );
   }
