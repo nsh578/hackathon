@@ -7,19 +7,17 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import { WebBrowser } from 'expo';
 import Colors from '../constants/Colors';
 const { width } = Dimensions.get('window');
+
 // Assets
 import dot from '../assets/images/greyDot.png';
-
-import OnboardScreen from './OnboardingScreen';
 
 // UI
 import Feed from '../components/Feed';
 import { Logo } from '../components/ui/Logo';
 import { Avatar } from '../components/ui/Avatar';
-import { HorizSeperator } from '../components/ui/HorizSeperator';
+import { HorizontalSeparator } from '../components/ui/HorizontalSeparator';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -48,8 +46,8 @@ export default class HomeScreen extends React.Component {
             <ScrollView
               style={styles.horizScroll}
               horizontal={true}
+              pagingEnabled={true}
               showsHorizontalScrollIndicator={false}
-              pagingEnabled
               onScroll={this._onScroll}
             >
               <View style={styles.horizCardContainer}>
@@ -84,7 +82,7 @@ export default class HomeScreen extends React.Component {
             />
           </View>
         </View>
-        <HorizSeperator />
+        <HorizontalSeparator />
         <Feed type={'Artist'} />
       </View>
     );

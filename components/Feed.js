@@ -1,6 +1,5 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
-import { WebBrowser } from 'expo';
 
 // UI
 import { Card } from './ui/Card';

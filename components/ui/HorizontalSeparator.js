@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-export const HorizSeperator = props => {
-  return <View style={styles.seperator} />;
+export const HorizontalSeparator = props => {
+  return <View style={styles.separator} />;
 };
 
 const styles = StyleSheet.create({
-  seperator: {
+  separator: {
     height: 1,
     backgroundColor: '#ffffff50',
     marginLeft: 20,

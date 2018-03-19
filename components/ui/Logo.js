@@ -20,9 +20,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
-    color: '#fff',
     width: 72,
-    height: 18,
-    fontWeight: 'bold',
+    resizeMode: 'contain',
   },
 });

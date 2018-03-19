@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Image } from 'react-native';
+
+// Assets
 import defaultImage from '../../assets/images/default-avatar.png';
 
 export const Avatar = ({ source }) => {

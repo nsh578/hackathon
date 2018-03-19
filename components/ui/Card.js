@@ -1,10 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
-import { WebBrowser } from 'expo';
-const { width } = Dimensions.get('window');
+import { StyleSheet, Text, View, Image } from 'react-native';
+
+// Assets
 import defaultImage from '../../assets/images/default-avatar.png';
+import tempPlaceHolderImage from '../../assets/images/Eric-Nam.jpg';
 
 export const Card = ({ avatar }) => {
+  /*
+    TODO: Make sure props are passed correctly to Card.
+          Needs avatar, name, data, location, and content (Image/Video/etc.)
+  */
   const avatarSource = defaultImage || avatar;
 
   return (
@@ -14,17 +19,19 @@ export const Card = ({ avatar }) => {
           <Image source={avatarSource} />
         </View>
         <View style={styles.nameAndTimeContainer}>
-          <Text style={styles.name}>Eric Nam</Text>
+          <Text style={styles.name}>
+            Eric Nam
+            {/* TODO: Replace with pulled artist name */}
+          </Text>
           <Text style={styles.timeAndLocation}>
             9:31 PM · West Pam Beach, FL
+            {/* TODO: Replace with pulled artist post time and location */}
           </Text>
         </View>
       </View>
       <View style={styles.contentContainer}>
-        <Image
-          style={styles.content}
-          source={require('../../assets/images/Eric-Nam.jpg')}
-        />
+        {/* TODO: Replace source with pulled artist post image data */}
+        <Image style={styles.content} source={tempPlaceHolderImage} />
       </View>
     </View>
   );
