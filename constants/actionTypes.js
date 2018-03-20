@@ -8,5 +8,15 @@ export default {
     SIGNUP_COMPLETE: 'app/auth/SIGNUP_COMPLETE',
     SIGNUP_FAILED: 'app/auth/SIGNUP_FAILED',
   },
-
+  // User actions:
+  user: {
+    INIT_USER: 'app/user/INIT_USER',
+    UPDATE_USER: 'app/user/UPDATE_USER',
+  },
+  // Feed actions:
+  feed: {
+    START_FETCHING_FEED: 'app/feed/START_FETCHING_FEED',
+    FEED_FETCH_SUCCESS: 'app/feed/FEED_FETCH_SUCCESS',
+    FEED_FETCH_FAIL: 'app/feed/FEED_FETCH_FAIL',
+  },
 }
