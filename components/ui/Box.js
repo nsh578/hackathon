@@ -13,21 +13,30 @@ export const Box = ({artistName, artistImage}) => {
     <View style={styles.imageContainer}>
       <Image style={styles.image}
         source={tempPlaceHolderImage} />
-      <View style={styles.boxName}>
-        <Text style={{color:'#fff'}}>{artistName}</Text>
+      <View>
+        <Text style={styles.title}>{artistName}</Text>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  imageContainer:{
+    borderRadius: 8,
+    margin: 5,
+    marginBottom: '10%',
+    height: 150,
+    // justifyContent: 'center',
+    alignItems: 'center',
+  },
   image: {
-    height: 115,
-    width: 115,
+    height: 150,
+    width: 150,
     borderRadius: 4,
   },
-  boxName: {
-    marginTop: -25,
-    backgroundColor: 'rgba(0,0,0,.5)',
+  title: {
+    // marginTop: -25,
+    color: '#fff',
+    fontSize: 20,
   },
 });

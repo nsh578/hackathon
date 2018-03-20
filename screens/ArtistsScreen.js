@@ -35,14 +35,20 @@ export default class ClubsScreen extends React.Component {
         <View style={styles.searchContainer}>
           <SearchBar />
         </View>
-        <Text style={styles.title}>Following</Text>
-        <View style={styles.boxContainer}>
-          <Box artistName={'Eric Nam'}/>
-          <Box artistName={'The Strokes'}/>
+        <View>
+          <Text style={styles.title}>Following</Text>
+          <View style={styles.boxContainer}>
+            <Box artistName={'Eric Nam'}/>
+            <Box artistName={'The Strokes'}/>
+          </View>
         </View>
         <HorizontalSeparator />
         <Text style={styles.title}>Request more artists!</Text>
         <Text style={styles.subtitle}>We’ll let you know when they claim their accounts!</Text>
+        <View style={styles.artistRequestContainer}>
+          <Box />
+          <RoundedButton />
+        </View>
 
       </View>
     );
@@ -53,6 +59,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.layoutBackground,
+    overflow: 'scroll',
   },
   pageTitle: {
     color: '#fff',
@@ -88,10 +95,14 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#fff',
-    fontSize: 19,
+    fontSize: 25,
+    marginLeft: '5%',
   },
   subtitle: {
     color: '#fff',
     fontSize: 14,
+  },
+  artistRequestContainer: {
+
   }
 });
