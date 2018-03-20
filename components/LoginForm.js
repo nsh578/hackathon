@@ -21,6 +21,9 @@ class LoginForm extends React.Component {
   _getHandler = key => val => {
     this.setState({[key]: val});
   }
+
+  usernameHandler = this._getHandler('username');
+  passwordHandler = this._getHandler('password');
   
   render() {
     return (
@@ -32,13 +35,14 @@ class LoginForm extends React.Component {
           icon={user}
           placeholder='Username'
           val={this.state.username}
-          getHandler={this._getHandler('username')}
+          getHandler={this.usernameHandler}
         />
         <InputField
           icon='lock'
           placeholder='Password'
           val={this.state.password}
-          getHandler={this._getHandler('password')}
+          getHandler={this.passwordHandler}
+          isSecure
         />
       </KeyboardAvoidingView>
     );

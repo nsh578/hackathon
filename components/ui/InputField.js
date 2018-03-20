@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, TextInput, View, StyleSheet } from 'react-native';
 
 export const InputField = (props) => {
-  const { key, val, getHandler, placeholder, returnKeyType='default', image } = props;
+  const { isSecure, val, getHandler, placeholder, returnKeyType='default', image } = props;
   return (
     <View style={styles.inputContainer}>
       <Image
@@ -14,6 +14,7 @@ export const InputField = (props) => {
         onChangeText={getHandler}
         placeholder={placeholder}
         returnKeyType={returnKeyType}
+        secureTextEntry={isSecure}
         value={val}
       />
     </View>
