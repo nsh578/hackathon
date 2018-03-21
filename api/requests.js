@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import config from '../config.js';
+import config from '../config';
 import client from './stream';
 
 import type { fetchFeedArgType } from '../constants/babelTypes';
