@@ -13,15 +13,15 @@ import {
 export default class SearchBar extends React.Component {
  constructor(props) {
    super(props);
-   this.state = { text: 'Search' };
+   this.state = { text: '' };
  }
   render() {
     return(
       <View style={styles.container}>
         <TextInput
           style={styles.input}
+          placeholder = "Search"
           onChangeText={(text) => this.setState({text})}
-          value={this.state.text}
         />
       </View>
     );
