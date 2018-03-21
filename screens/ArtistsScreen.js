@@ -11,6 +11,7 @@ import Colors from '../constants/Colors';
 
 // UI
 import Feed from '../components/Feed';
+import {Header} from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import { Box } from '../components/ui/Box';
 import { Logo } from '../components/ui/Logo';
@@ -28,28 +29,28 @@ export default class ClubsScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.topNav}>
-          <Text style={styles.pageTitle}>My Artists</Text>
-          <Avatar source={''} />
-        </View>
+        <Header title={'My Artist'}/>
         <View style={styles.searchContainer}>
           <SearchBar />
         </View>
         <View>
-          <Text style={styles.title}>Following</Text>
-          <View style={styles.boxContainer}>
-            <Box artistName={'Eric Nam'}/>
-            <Box artistName={'The Strokes'}/>
+          <View>
+            <Text style={styles.title}>Following</Text>
+            <View style={styles.followingContainer}>
+              <Box artistName={'Eric Nam'}/>
+              <Box artistName={'The Strokes'}/>
+            </View>
+          </View>
+          <HorizontalSeparator />
+          <View style={styles.requestContainer}>
+            <Text style={styles.title}>Request more artists!</Text>
+            <Text style={styles.subtitle}>We’ll let you know when they claim their accounts!</Text>
+            <View style={styles.artistRequestContainer}>
+              <Box />
+              <RoundedButton />
+            </View>
           </View>
         </View>
-        <HorizontalSeparator />
-        <Text style={styles.title}>Request more artists!</Text>
-        <Text style={styles.subtitle}>We’ll let you know when they claim their accounts!</Text>
-        <View style={styles.artistRequestContainer}>
-          <Box />
-          <RoundedButton />
-        </View>
-
       </View>
     );
   }
@@ -59,50 +60,33 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.layoutBackground,
-    overflow: 'scroll',
-  },
-  pageTitle: {
-    color: '#fff',
-    fontSize: 34,
-    fontWeight: '600',
-    marginTop: 25,
-    marginLeft: 15,
-    marginBottom: 10,
-  },
-  topNav: {
-    width: '100%',
-    paddingBottom: 10,
   },
   searchContainer: {
-    height: 79,
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  boxContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    width: '90%',
     justifyContent: 'center',
+    marginBottom: 50,
   },
-  image: {
-    height: 115,
-    width: 115,
-    borderRadius: 4,
-  },
-  boxName: {
-    marginTop: -25,
-    backgroundColor: 'rgba(0,0,0,.5)',
+  followingContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
   title: {
     color: '#fff',
     fontSize: 25,
     marginLeft: '5%',
+    marginTop: 5,
   },
   subtitle: {
     color: '#fff',
     fontSize: 14,
+    marginTop: 5,
+    marginBottom: 5,
+  },
+  requestContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   artistRequestContainer: {
-
+    flexDirection: 'column',
   }
 });
