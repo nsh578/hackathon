@@ -33,13 +33,11 @@ export default class ClubsScreen extends React.Component {
         <View style={styles.searchContainer}>
           <SearchBar />
         </View>
-        <View>
-          <View>
-            <Text style={styles.title}>Following</Text>
-            <View style={styles.followingContainer}>
-              <Box artistName={'Eric Nam'}/>
-              <Box artistName={'The Strokes'}/>
-            </View>
+        <ScrollView>
+          <Text style={styles.title}>Following</Text>
+          <View style={styles.followingContainer}>
+            <Box artistName={'Eric Nam'}/>
+            <Box artistName={'The Strokes'}/>
           </View>
           <HorizontalSeparator />
           <View style={styles.requestContainer}>
@@ -50,7 +48,7 @@ export default class ClubsScreen extends React.Component {
               <RoundedButton />
             </View>
           </View>
-        </View>
+        </ScrollView>
       </View>
     );
   }
@@ -69,6 +67,7 @@ const styles = StyleSheet.create({
   followingContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    marginBottom: '5%',
   },
   title: {
     color: '#fff',
@@ -87,6 +86,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   artistRequestContainer: {
+    display: 'flex',
     flexDirection: 'column',
+    // justifyContent: 'center',
+    alignItems: 'center',
   }
 });

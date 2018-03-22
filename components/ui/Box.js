@@ -24,9 +24,7 @@ const styles = StyleSheet.create({
   imageContainer:{
     borderRadius: 8,
     margin: 5,
-    marginBottom: '10%',
     height: 150,
-    // justifyContent: 'center',
     alignItems: 'center',
   },
   image: {
