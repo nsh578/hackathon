@@ -1,41 +1,47 @@
+import _ from 'lodash';
+
 export type userType = {
   isArtist: boolean,
   username: string,
   email: string,
   password: string,
-  firstName: string,
-  lastName: string,
-  phoneNumber: number | null,
+  following: Array,
+  followers: Array,
   token: string,
+  firstName: string | null,
+  lastName: string | null,
+  phoneNumber: number | null,
 }
 
-export const toUserType = ({
-  isArtist,
-  username,
-  email,
-  password,
-  firstName,
-  lastName,
-  phoneNumber,
-  token,
-}):userType => {
-  if (!password
-     || !username
-     || !email
-     || !firstName
-     || !lastName
-     || !token) throw TypeError('Cannot cast object to userType');
-  return {
-    token,
-    username,
-    email,
-    password,
-    firstName,
-    lastName,
-    isArtist: isArtist || false,
-    phoneNumber: phoneNumber || null,
-  };
+export const toUserType = (obj):userType => {
+  const user = _.pick(obj, [
+    'isArtist',
+    'username',
+    'email',
+    'password',
+    'following',
+    'followers',
+    'token',
+    'firstName',
+    'lastName',
+    'phoneNumber',
+  ]);
+  user.following = user.following || [];
+  user.followers = user.followers || [];
+  user.isArtist = user.isArtist || false;
+  return user;
 }
+
+export type postType = {
+  _id: string,
+  _cached: bool,
+  artistPost: bool,
+  authorUsername: string,
+  timestamp: string,
+  location: string | null,
+  content: string | null,
+}
+
 
 export type fetchArtistFeedArgType = { user: userType };
 export type fetchFanFeedArgType = { artistUsername: string }
