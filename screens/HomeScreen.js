@@ -18,6 +18,7 @@ import Feed from '../components/Feed';
 import { Logo } from '../components/ui/Logo';
 import { Avatar } from '../components/ui/Avatar';
 import { HorizontalSeparator } from '../components/ui/HorizontalSeparator';
+import { HorizontalCard } from '../components/ui/HorizontalCard';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -42,45 +43,31 @@ export default class HomeScreen extends React.Component {
           <Avatar source={''} />
         </View>
         <View style={styles.homeTop}>
-          <View style={styles.horizCardContainer}>
-            <ScrollView
-              style={styles.horizScroll}
-              horizontal={true}
-              pagingEnabled={true}
-              showsHorizontalScrollIndicator={false}
-              onScroll={this._onScroll}
-            >
-              <View style={styles.horizCardContainer}>
-                <Text style={styles.horizCardTitle}>
-                  Check out Eric Nam's new weekly challenges.
-                </Text>
-                <View style={styles.horizCard}>
-                  <Text>ChallengeCard</Text>
-                </View>
-              </View>
-              <View style={styles.horizCardContainer}>
-                <Text style={styles.horizCardTitle}>
-                  Check out Eric Nam's new weekly challenges.
-                </Text>
-                <View style={styles.horizCard}>
-                  <Text>ChallengeCard2</Text>
-                </View>
-              </View>
-              <View style={styles.horizCardContainer}>
-                <Text style={styles.horizCardTitle}>
-                  Check out Eric Nam's new weekly challenges.
-                </Text>
-                <View style={styles.horizCard}>
-                  <Text>ChallengeCard3</Text>
-                </View>
-              </View>
-            </ScrollView>
-            <Dots
-              style={styles.dotsRow}
-              current={this.state.currentPage}
-              list={[0, 1, 2]}
+          <ScrollView
+            style={styles.horizScroll}
+            horizontal={true}
+            pagingEnabled={true}
+            showsHorizontalScrollIndicator={false}
+            onScroll={this._onScroll}
+          >
+            <HorizontalCard
+              title={'Check out Eric Nam’s new weekly challenges.'}
+              image={''}
             />
-          </View>
+            <HorizontalCard
+              title={'Check out Eric Nam’s new weekly challenges.'}
+              image={''}
+            />
+            <HorizontalCard
+              title={'Check out Eric Nam’s new weekly challenges.'}
+              image={''}
+            />
+          </ScrollView>
+          <Dots
+            style={styles.dotsContainer}
+            current={this.state.currentPage}
+            list={[0, 1, 2]}
+          />
         </View>
         <HorizontalSeparator />
         <Feed type={'Artist'} />
@@ -127,10 +114,10 @@ export default class HomeScreen extends React.Component {
 const Dots = ({ list, current }) => {
   return (
     <View style={styles.dots}>
-      {list.map(i => {
+      {list.map((i, index) => {
         return (
           <Image
-            key={i}
+            key={index}
             source={dot}
             style={current === i ? styles.dotFilled : styles.dotDefault}
           />
@@ -152,71 +139,36 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     textAlign: 'center',
   },
-  contentContainer: {
-    paddingTop: 30,
-  },
   topNav: {
     display: 'flex',
     flexDirection: 'row',
     height: 79,
   },
   homeTop: {
-    width: '100%',
-    height: 200,
-    paddingBottom: 35,
-  },
-  horizCardContainer: {
-    justifyContent: 'center',
+    width: width,
+    display: 'flex',
     alignItems: 'center',
-    paddingLeft: 20,
-    paddingRight: 20,
-    height: 150,
   },
   horizScroll: {
     position: 'relative',
   },
-  horizCardContainer: {
-    width: width,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 180,
-  },
-  horizCardTitle: {
-    color: '#fff',
-    fontSize: 24,
-    fontWeight: '600',
-    width: width - 40,
-    marginBottom: 10,
-  },
-  horizCard: {
-    width: width - 40,
-    height: 94,
-    backgroundColor: '#f1f1f1',
-    flex: 2,
-    flexDirection: 'row',
-    zIndex: 2,
-    borderRadius: 8,
-    paddingTop: 13,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 11,
-  },
   dots: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: '25%',
+    width: '23%',
     justifyContent: 'space-around',
-    paddingTop: 10,
+    paddingTop: 15,
+    paddingBottom: 15,
   },
   dotFilled: {
-    height: 14,
-    width: 14,
+    height: 12,
+    width: 12,
     resizeMode: 'contain',
     tintColor: '#50e3c2',
   },
   dotDefault: {
-    height: 14,
-    width: 14,
+    height: 12,
+    width: 12,
     resizeMode: 'contain',
     opacity: 0.5,
   },

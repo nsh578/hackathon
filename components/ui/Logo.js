@@ -14,13 +14,13 @@ const styles = StyleSheet.create({
   logoContainer: {
     flex: 1,
     width: '100%',
-    paddingTop: 14,
+    paddingTop: 10,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
   logo: {
-    width: 72,
+    width: 79,
     resizeMode: 'contain',
   },
 });
