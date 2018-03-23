@@ -19,4 +19,9 @@ export default {
     FEED_FETCH_SUCCESS: 'app/feed/FEED_FETCH_SUCCESS',
     FEED_FETCH_FAIL: 'app/feed/FEED_FETCH_FAIL',
   },
+  // Error actions:
+  error: {
+    ENQUEUE_ERROR: 'app/error/ENQUEUE_ERROR',
+    DEQUEUE_ERROR: 'app/error/DEQUEUE_ERROR',
+  },
 }
