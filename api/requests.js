@@ -3,7 +3,7 @@ import axios from 'axios';
 import config from '../config';
 import client from './stream';
 
-import type { fetchFeedArgType } from '../constants/babelTypes';
+import type { userType, postType, fetchFeedArgType } from '../constants/babelTypes';
 
 export const loginRequest = credentials => ({
   method: 'Post',
@@ -58,3 +58,26 @@ export const streamTokenRequest = ({ artistUsername, user }: fetchFeedArgType) =
     }),
   };
 };
+
+export const fetchPostRequest = (user: userType, postId) => ({
+  method: 'GET',
+  url: `${__CONFIG__.apiUrl}/posts/${postId}`,
+  headers: { 'x-auth': user.token },
+  transformResponse:
+    axios.defaults.transformResponse.concat(data => ({
+      _id: data._id,
+      _cached: true,
+      authorUsername: data.author,
+      timestamp: data.createdAt,
+      artistPost: data.byArtist,
+      content: data.text,
+    })),
+});
+
+export const createPostRequest = (user: userType, stream, post: postType) => ({
+  method: 'POST',
+  url: `${__CONFIG__.apiUrl}/posts/${
+    stream.slug === 'artist' ? 'artist' : stream.feedUrl}`,
+  headers: { 'x-auth': user.token },
+  data: post,
+});
