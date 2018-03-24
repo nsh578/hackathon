@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 20,
     top: 25,
-    borderRadius: 50,
+    borderRadius: 25,
     overflow: 'hidden',
   },
   avatar: {

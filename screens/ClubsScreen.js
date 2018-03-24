@@ -12,7 +12,7 @@ import Colors from '../constants/Colors';
 // UI
 import Feed from '../components/Feed';
 import SearchBar from '../components/SearchBar';
-import {Header} from '../components/Header';
+import { Header } from '../components/Header';
 import { Box } from '../components/ui/Box';
 import { Logo } from '../components/ui/Logo';
 import { RoundedButton } from '../components/ui/RoundedButton';
@@ -29,7 +29,7 @@ export default class ClubsScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header title={'My Club'}/>
+        <Header title={'My Clubs'}/>
         <View style={styles.searchContainer}>
           <SearchBar />
         </View>
@@ -49,9 +49,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.layoutBackground,
   },
   searchContainer: {
-    width: '90%',
-    justifyContent: 'center',
-    marginBottom: 50,
+    alignItems: 'center',
+    marginBottom: 20,
+    //paddingHoiztonal: 10,
   },
   artistContainer: {
     flexDirection: 'row',

@@ -30,7 +30,7 @@ export default class SearchBar extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: '90%',
   },
   input: {
     height: 40,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     borderRadius: 30,
     borderWidth: 0,
-    // borderColor: 'grey',
+    color:"#000",
     backgroundColor : "#FFF",
   },
 });

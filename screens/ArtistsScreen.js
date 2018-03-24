@@ -60,9 +60,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.layoutBackground,
   },
   searchContainer: {
-    width: '90%',
-    justifyContent: 'center',
-    marginBottom: 50,
+    alignItems: 'center',
+    marginBottom: 20,
   },
   followingContainer: {
     flexDirection: 'row',
