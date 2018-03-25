@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExpoConfigView } from '@expo/samples';
+import ReduxTest from '../components/ReduxTest';
 
 export default class NoticesScreen extends React.Component {
   static navigationOptions = {
@@ -7,8 +7,6 @@ export default class NoticesScreen extends React.Component {
   };
 
   render() {
-    /* Go ahead and delete ExpoConfigView and replace it with your
-     * content, we just wanted to give you a quick view of your config */
-    return <ExpoConfigView />;
+    return <ReduxTest />;
   }
 }

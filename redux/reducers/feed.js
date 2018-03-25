@@ -1,23 +1,22 @@
 import { fromJS } from 'immutable';
 
 import thunkless from '../middleware/thunkless';
-import { auth as actionTypes } from '../../constants/actionTypes';
+import { feedTypes as actionTypes } from '../../constants/actionTypes';
 import { ARTIST, FAN, FETCH_STATUS, ERROR_MSG, STREAM }
   from '../../constants/feedStateKeys';
 
-export const initialState = () =>
-  fromJS({
-    [ARTIST]: {
-      [FETCH_STATUS]: null,
-      [ERROR_MSG]: null,
-      [STREAM]: null,
-    },
-    [FAN]: {
-      [FETCH_STATUS]: {},
-      [ERROR_MSG]: {},
-      [STREAM]: {},
-    },
-  })
+export const initialState = fromJS({
+  [ARTIST]: {
+    [FETCH_STATUS]: null,
+    [ERROR_MSG]: null,
+    [STREAM]: null,
+  },
+  [FAN]: {
+    [FETCH_STATUS]: {},
+    [ERROR_MSG]: {},
+    [STREAM]: {},
+  },
+})
 
 export default (state = initialState, action) => {
   if (!action.feedType) return state;
@@ -39,7 +38,7 @@ export default (state = initialState, action) => {
           return state;
       }
 
-    case actionTypes.FEED_FETCH_COMPLETE:
+    case actionTypes.FEED_FETCH_SUCCESS:
       switch (_feedType) {
         case ARTIST:
           return state.setIn(
@@ -69,7 +68,7 @@ export default (state = initialState, action) => {
             thunkless.actionStatus.FAILURE
           ).setIn(
             [ARTIST, STREAM],
-            action.error.message
+            action.payload.message
           );
         case FAN:
           return state.mergeIn(
@@ -77,7 +76,7 @@ export default (state = initialState, action) => {
             { [artistUsername]: thunkless.actionStatus.FAILURE }
           ).mergeIn(
             [FAN, STREAM],
-            { [artistUsername]: action.error.message }
+            { [artistUsername]: action.payload.message }
           );
         default:
           return state;

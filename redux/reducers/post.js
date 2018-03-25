@@ -1,9 +1,9 @@
 import { Map } from 'immutable';
 
 import thunkless from '../middleware/thunkless';
-import { post as actionTypes } from '../../constants/actionTypes';
+import { postTypes as actionTypes } from '../../constants/actionTypes';
 
-const initialState = Map();
+export const initialState = Map();
 
 export default (state = initialState, { payload, stream, ...action }) => {
   switch (action.type) {
@@ -28,7 +28,9 @@ export default (state = initialState, { payload, stream, ...action }) => {
     case actionTypes.ADD_POST:
       return state.mergeDeep({
         [stream.feedUrl]: {
-          posts: { [payload.timestamp]: payload },
+          posts: {
+            [`${payload.timestamp.toISOString()}.${payload._id}`]: payload,
+          },
         },
       });
     case actionTypes.START_UPLOADING_POST:
@@ -59,7 +61,10 @@ export default (state = initialState, { payload, stream, ...action }) => {
       return state.mergeDeep({
         [stream.feedUrl]: {
           fetchPostStatus: thunkless.actionStatus.SUCCESS,
-          posts: { [payload.data.timestamp]: payload.data },
+          posts: {
+            [`${payload.data.timestamp.toISOString()}.${payload.data._id}`]:
+              payload.data,
+          },
         },
       });
     case actionTypes.FETCH_POST_FAILED:
