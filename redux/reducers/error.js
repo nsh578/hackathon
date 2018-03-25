@@ -1,8 +1,8 @@
 import { List } from 'immutable';
 
-import { error as actionTypes } from '../../constants/actionTypes';
+import { errorTypes as actionTypes } from '../../constants/actionTypes';
 
-const initialState = List();
+export const initialState = List();
 
 export default (state = initialState, action) => {
   switch (action.type) {

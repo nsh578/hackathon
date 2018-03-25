@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 import config from '../config';
-import client from './stream';
 
 import type { userType, postType, fetchFeedArgType } from '../constants/babelTypes';
 
@@ -35,12 +34,9 @@ export const signupRequest = userData => ({
 
 export const streamTokenRequest = ({ artistUsername, user }: fetchFeedArgType) => {
   let uri;
-  let type;
   if (artistUsername) {
-    type = 'fan';
     uri = `/feed/fan/${artistUsername}`;
   } else {
-    type = 'artist';
     uri = '/feed/artist';
   }
   return {
@@ -49,26 +45,21 @@ export const streamTokenRequest = ({ artistUsername, user }: fetchFeedArgType) =
     headers: user ? { 'x-auth': user.token } : {},
     transformResponse: axios.defaults.transformResponse.concat((data, headers) => {
       if (!headers['stream-auth']) return data;
-      const stream = client.feed(
-        type,
-        artistUsername || user.username,
-        headers['stream-auth']
-      );
-      return { stream, ...data };
+      return { streamToken: headers['stream-auth'] };
     }),
   };
 };
 
 export const fetchPostRequest = (user: userType, postId) => ({
   method: 'GET',
-  url: `${__CONFIG__.apiUrl}/posts/${postId}`,
+  url: `${config.apiUrl}/posts/${postId}`,
   headers: { 'x-auth': user.token },
   transformResponse:
     axios.defaults.transformResponse.concat(data => ({
       _id: data._id,
       _cached: true,
       authorUsername: data.author,
-      timestamp: data.createdAt,
+      timestamp: new Date(data.createdAt),
       artistPost: data.byArtist,
       content: data.text,
     })),
@@ -76,7 +67,7 @@ export const fetchPostRequest = (user: userType, postId) => ({
 
 export const createPostRequest = (user: userType, stream, post: postType) => ({
   method: 'POST',
-  url: `${__CONFIG__.apiUrl}/posts/${
+  url: `${config.apiUrl}/posts/${
     stream.slug === 'artist' ? 'artist' : stream.feedUrl}`,
   headers: { 'x-auth': user.token },
   data: post,

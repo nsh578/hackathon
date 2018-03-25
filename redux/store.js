@@ -1,9 +1,11 @@
 import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-import { middleware as thunklessMiddleware } from './middleware/thunkless';
-import rootReducer from './reducers';
+import thunkless from './middleware/thunkless';
+import rootReducer, { initialState } from './reducers';
 
-const middleware = applyMiddleware(thunklessMiddleware);
-const store = createStore(rootReducer, middleware);
+const middleware = applyMiddleware(thunkless.middleware);
+const enhancers = __DEV__ ? composeWithDevTools(middleware) : middleware;
+const store = createStore(rootReducer, initialState, enhancers);
 
 export default store;

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import thunkless from '../middleware/thunkless';
 import type { userType, postType } from '../../constants/babelTypes';
-import { post as postTypes, error as errorTypes } from '../../constants/actionTypes';
+import actionTypes from '../../constants/actionTypes';
 import { fetchPostRequest, createPostRequest } from '../../api/requests';
 import {
   fetchActivitiesStatusSelectorCreator,
@@ -23,22 +23,24 @@ const initPosts = (stream, options) => ({
     thunkless.MULTI_ACTION,
   ]),
   promise: new Promise(resolve =>
-    stream.get(options, activities =>
-      activities.forEach((activity) => {
-        const post = {
-          _id: activity.foreign_id,
-          _cached: false,
-          artistPost: stream === ARTIST,
-          authorUsername: activity.author,
-          timestamp: activity.time,
-        };
-        resolve([post, null]);
-      }))).catch(error => [error, null]),
+    stream.get(options).then(({ results }) => {
+      const posts = [];
+      results.forEach(activity => posts.push({
+        _id: activity.foreign_id,
+        _cached: false,
+        artistPost: stream === ARTIST,
+        authorUsername: activity.author,
+        timestamp: new Date(`${activity.time}z`),
+      }));
+      resolve([posts, null]);
+    }))
+    .catch(error => Promise.reject([error, null])),
   type: [
-    postTypes.START_FETCHING_ACTIVITIES,
-    [postTypes.ADD_POST, postTypes.FETCH_ACTIVITIES_SUCCESS],
-    [errorTypes.ENQUEUE_ERROR, postTypes.FETCH_ACTIVITIES_FAILED],
+    actionTypes.post.START_FETCHING_ACTIVITIES,
+    [actionTypes.post.ADD_POST, actionTypes.post.FETCH_ACTIVITIES_SUCCESS],
+    [actionTypes.error.ENQUEUE_ERROR, actionTypes.post.FETCH_ACTIVITIES_FAILED],
   ],
+  iterateActions: new Set([actionTypes.post.ADD_POST]),
   statusSelector: fetchActivitiesStatusSelectorCreator(stream),
   stream,
 });
@@ -56,11 +58,11 @@ const fetchPost = (user: userType, stream, postId) => ({
     thunkless.MULTI_ACTION,
   ]),
   promise: axios.request(fetchPostRequest(user, postId))
-    .catch(error => [error, null]),
+    .catch(error => Promise.reject([error, null])),
   type: [
-    postTypes.START_FETCHING_POST,
-    postTypes.FETCH_POST_SUCCESS,
-    [errorTypes.ENQUEUE_ERROR, postTypes.FETCH_POST_FAILED],
+    actionTypes.post.START_FETCHING_POST,
+    actionTypes.post.FETCH_POST_SUCCESS,
+    [actionTypes.error.ENQUEUE_ERROR, actionTypes.post.FETCH_POST_FAILED],
   ],
   statusSelector: fetchPostStatusSelectorCreator(stream),
   stream,
@@ -80,12 +82,12 @@ const createPost = (user: userType, stream, post: postType) => ({
     thunkless.MULTI_ACTION,
   ]),
   promise: axios.request(createPostRequest(user, stream, post))
-    .then(response => [null, response.data])
-    .catch(error => [error, null]),
+    .then(response => Promise.resolve([null, response.data]))
+    .catch(error => Promise.reject([error, null])),
   type: [
-    postTypes.START_UPLOADING_POST,
-    [postTypes.UPLOAD_POST_SUCCESS, postTypes.ADD_POST],
-    [errorTypes.ENQUEUE_ERROR, postTypes.UPLOAD_POST_FAILED],
+    actionTypes.post.START_UPLOADING_POST,
+    [actionTypes.post.UPLOAD_POST_SUCCESS, actionTypes.post.ADD_POST],
+    [actionTypes.error.ENQUEUE_ERROR, actionTypes.post.UPLOAD_POST_FAILED],
   ],
   statusSelector: uploadPostStatusSelectorCreator(stream),
   stream,

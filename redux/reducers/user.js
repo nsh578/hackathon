@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import { Map } from 'immutable';
 
-import { user as actionTypes } from '../../constants/actionTypes';
+import { userTypes as actionTypes } from '../../constants/actionTypes';
 
-const initialState = Map({
+export const initialState = Map({
   isArtist: null,
   username: null,
   email: null,

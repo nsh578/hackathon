@@ -1,9 +1,9 @@
 import { Map } from 'immutable';
 
 import thunkless from '../middleware/thunkless';
-import { auth as actionTypes } from '../../constants/actionTypes';
+import { authTypes as actionTypes } from '../../constants/actionTypes';
 
-const initialState = Map({
+export const initialState = Map({
   loginStatus: null,
   signupStatus: null,
   authorized: false,
@@ -21,7 +21,7 @@ export default (state = initialState, action) => {
     case actionTypes.AUTH_FAILED:
       return state
         .set('loginStatus', thunkless.actionStatus.FAILURE)
-        .set('errorMsg', action.error.message);
+        .set('errorMsg', action.payload.message);
     case actionTypes.START_SIGNUP:
       return state.set('signupStatus', thunkless.actionStatus.BUSY);
     case actionTypes.SIGNUP_COMPLETE:
@@ -31,7 +31,7 @@ export default (state = initialState, action) => {
     case actionTypes.SIGNUP_FAILED:
       return state
         .set('signupStatus', thunkless.actionStatus.FAILURE)
-        .set('errorMsg', action.error.message);
+        .set('errorMsg', action.payload.message);
     default:
       return state;
   }

@@ -1,5 +1,7 @@
 import stream from 'getstream';
 
-const client = stream.connect(__CONFIG__.streamApiKey);
+import config from '../config';
+
+const client = stream.connect(config.streamApiKey);
 
 export default client;
