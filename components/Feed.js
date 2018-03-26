@@ -23,6 +23,7 @@ export default class Feed extends React.Component {
         </View>
         <FlatList
           data={data}
+          ListHeaderComponent={<Text style={styles.title}>{type} Feed</Text>}
           renderItem={({ item, index }) => <Card key={index} />}
         />
       </View>
@@ -31,13 +32,15 @@ export default class Feed extends React.Component {
 }
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   title: {
     color: '#fff',
     fontSize: 24,
     fontWeight: '600',
     marginBottom: 10,
+    marginTop: 10,
   },
   postContainer: {
     marginTop: 5,

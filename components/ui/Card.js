@@ -75,13 +75,16 @@ const styles = StyleSheet.create({
   },
   name: {
     color: '#333',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: 'bold',
+    lineHeight: 14,
   },
   timeAndLocation: {
+    fontSize: 13,
     color: '#333',
     opacity: 0.4,
-    lineHeight: 15,
+    lineHeight: 14,
+    fontWeight: '100',
   },
   contentContainer: {
     flex: 1,
