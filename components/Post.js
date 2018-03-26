@@ -3,7 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight,
+  TouchableOpacity,
   Image,
 } from 'react-native';
 import Colors from '../constants/Colors';
@@ -20,7 +20,7 @@ export default class Post extends React.Component {
   render() {
     return(
       <View style= {styles.container}>
-        <TouchableHighlight
+        <TouchableOpacity
           style= {styles.post}
           >
             <View>
@@ -31,7 +31,7 @@ export default class Post extends React.Component {
                 <Text style={styles.placeholder}>Share a post....</Text>
               </View>
             </View>
-          </TouchableHighlight>
+          </TouchableOpacity>
       </View>
     );
   }

@@ -5,7 +5,6 @@ import {
   Text,
   View,
   Image,
-  Dimensions,
 } from 'react-native';
 import Colors from '../constants/Colors';
 
@@ -19,7 +18,6 @@ import { RoundedButton } from '../components/ui/RoundedButton';
 import { Avatar } from '../components/ui/Avatar';
 import { HorizontalSeparator } from '../components/ui/HorizontalSeparator';
 
-import tempPlaceHolderImage from '../assets/images/Eric-Nam.jpg';
 
 export default class ClubsScreen extends React.Component {
   static navigationOptions = {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { TabNavigator, TabBarBottom } from 'react-navigation';
+import { TabNavigator } from 'react-navigation';
 
 import Colors from '../constants/Colors';
 
@@ -10,7 +10,7 @@ import ArtistsScreen from '../screens/ArtistsScreen';
 import ClubsScreen from '../screens/ClubsScreen';
 import NoticesScreen from '../screens/NoticesScreen';
 
-export default TabNavigator(
+export default ClubTabNavigator(
   {
     Home: {
       screen: HomeScreen,
